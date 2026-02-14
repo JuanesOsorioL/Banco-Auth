@@ -14,9 +14,7 @@ public record LoginRequestDto(
 
         @NotBlank(message = "USR_004")
         @Size(min = 8, max = 64, message = "USR_005")
-        String clue,
+        String clue
 
-        @NotBlank(message = "USR_006")
-        String rolId
 ) {
 }

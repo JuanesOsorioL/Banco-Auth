@@ -11,4 +11,5 @@ public interface RoleMapper {
     Role toRole(RoleRequestDto roleRequestDto);
 
     RoleResponseDto toRoleResponseDto(Role role);
+
 }

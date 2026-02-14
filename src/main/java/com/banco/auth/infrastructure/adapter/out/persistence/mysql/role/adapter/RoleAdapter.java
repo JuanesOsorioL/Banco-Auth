@@ -7,6 +7,7 @@ import com.banco.auth.infrastructure.adapter.out.persistence.mysql.role.reposito
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Repository
@@ -26,8 +27,10 @@ public class RoleAdapter implements RoleRepositoryOut {
     }
 
     @Override
-    public Role findRoleById(UUID id) {
-        return roleEntityMapper.toRole(roleJpaRepository.getReferenceById(id));
+    public Optional<Role> findRoleById(UUID id) {
+
+        return roleJpaRepository.findById(id)
+                .map(roleEntityMapper::toRole);
     }
 
     @Override

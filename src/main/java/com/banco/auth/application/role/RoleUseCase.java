@@ -19,13 +19,14 @@ public class RoleUseCase implements RoleUseCaseIn {
 
     @Override
     public Role createRole(Role role) {
-        Role newRole = Role.createRole(role.rolName(),role.rolDescription());
+        Role newRole = Role.createRole(role.rolName(), role.rolDescription());
         return roleRepository.createRole(newRole);
     }
 
     @Override
     public Role findRoleById(UUID id) {
-        return roleRepository.findRoleById(id);
+        return roleRepository.findRoleById(id)
+                .orElseThrow(() -> new RuntimeException("Role not found with id: " + id));
     }
 
     @Override

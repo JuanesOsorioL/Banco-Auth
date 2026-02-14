@@ -2,33 +2,16 @@ package com.banco.auth.infrastructure.adapter.out.persistence.mysql.role.mapper;
 
 import com.banco.auth.domain.role.Role;
 import com.banco.auth.infrastructure.adapter.out.persistence.mysql.role.entity.RoleEntity;
-import org.springframework.stereotype.Component;
+import org.mapstruct.Mapper;
 
-@Component
-public class RoleEntityMapper {
-    public RoleEntity toRoleEntity(Role role) {
-        if (role == null) {
-            return null;
-        }
+import java.util.Set;
 
-        return RoleEntity.builder()
-                .rolId(role.rolId())
-                .rolName(role.rolName())
-                .rolDescription(role.rolDescription())
-                .rolStatus(role.rolStatus())
-                .build();
-    }
+@Mapper(componentModel = "spring")
+public interface RoleEntityMapper {
+    RoleEntity toRoleEntity(Role role);
 
-    public Role toRole(RoleEntity roleEntity) {
-        if (roleEntity == null) {
-            return null;
-        }
+    Role toRole(RoleEntity roleEntity);
 
-        return new Role(
-                roleEntity.getRolId(),
-                roleEntity.getRolName(),
-                roleEntity.getRolDescription(),
-                roleEntity.getRolStatus()
-        );
-    }
+    Set<Role> toSetRoles(Set<RoleEntity> roles);
+
 }

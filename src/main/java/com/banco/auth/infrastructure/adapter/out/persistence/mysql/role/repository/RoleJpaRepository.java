@@ -8,6 +8,4 @@ import java.util.UUID;
 
 @Repository
 public interface RoleJpaRepository extends JpaRepository<RoleEntity, UUID> {
-    //RoleEntity findByRolId(String id);
-
 }

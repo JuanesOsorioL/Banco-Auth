@@ -1,5 +1,6 @@
 package com.banco.auth.domain.role;
 
+import java.util.Objects;
 import java.util.UUID;
 
 public record Role(
@@ -18,12 +19,22 @@ public record Role(
     }
 
     public Role roleDeactivate() {
-        return new Role(rolId, rolName, rolDescription,false);
+        return new Role(rolId, rolName, rolDescription, false);
     }
 
     public Role roleActivate() {
         return new Role(rolId, rolName, rolDescription, true);
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Role role = (Role) o;
+        return Objects.equals(rolId, role.rolId) && Objects.equals(rolName, role.rolName) && Objects.equals(rolStatus, role.rolStatus) && Objects.equals(rolDescription, role.rolDescription);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(rolId, rolName, rolDescription, rolStatus);
+    }
 }
