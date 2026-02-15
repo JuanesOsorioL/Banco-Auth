@@ -43,12 +43,26 @@ public class LoginUseCase implements LoginUseCaseIn {
         }
 
         Set<Role> setRoles = roles.stream()
-                .peek(a -> System.out.println("id = " + a))
                 .map(roleUseCaseIn::findRoleById)
                 .filter(role -> !login.roles().contains(role))
-                .peek(a -> System.out.println("id = " + a))
                 .collect(Collectors.toSet());
         login.roles().addAll(setRoles);
         return loginRepository.addRole(login);
+    }
+
+    @Override
+    public Login removeRole(UUID id, Set<UUID> roles) {
+        Login login = loginRepository.getloginById(id);
+        if (login == null) {
+            throw new RuntimeException("Login no encontrado con el ID: " + id);
+        }
+        Set<Role> rolesToRemove = roles.stream()
+                .map(roleUseCaseIn::findRoleById)
+                .filter(role -> login.roles().contains(role))
+                .collect(Collectors.toSet());
+
+        login.roles().removeAll(rolesToRemove);
+
+        return loginRepository.removeRole(login);
     }
 }

@@ -12,4 +12,6 @@ public interface LoginUseCaseIn {
     List<Login> getAllRegister();
 
     Login addRole(UUID id, Set<UUID> roles);
+
+    Login removeRole(UUID id, Set<UUID> roles);
 }

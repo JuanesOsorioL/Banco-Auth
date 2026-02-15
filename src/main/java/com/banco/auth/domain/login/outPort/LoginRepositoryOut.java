@@ -14,4 +14,6 @@ public interface LoginRepositoryOut {
 
     Login addRole(Login login);
 
+    Login removeRole(Login login);
+
 }

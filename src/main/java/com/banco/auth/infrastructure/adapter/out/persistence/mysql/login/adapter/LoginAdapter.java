@@ -43,4 +43,9 @@ public class LoginAdapter implements LoginRepositoryOut {
     public Login addRole(Login login) {
         return loginEntityMapper.toLoginAdd(loginJpaRepository.save(loginEntityMapper.toLoginEntityAdd(login)));
     }
+
+    @Override
+    public Login removeRole(Login login) {
+        return loginEntityMapper.toLoginAdd(loginJpaRepository.save(loginEntityMapper.toLoginEntityAdd(login)));
+    }
 }
