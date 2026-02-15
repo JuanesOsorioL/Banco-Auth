@@ -21,14 +21,22 @@ public class RoleAdapter implements RoleRepositoryOut {
         this.roleEntityMapper = roleEntityMapper;
     }
 
-    @Override
-    public Role createRole(Role rol) {
+    private Role getRole(Role rol) {
         return roleEntityMapper.toRole(roleJpaRepository.save(roleEntityMapper.toRoleEntity(rol)));
     }
 
     @Override
-    public Optional<Role> findRoleById(UUID id) {
+    public Role createRole(Role rol) {
+        return getRole(rol);
+    }
 
+    @Override
+    public Role saveChange(Role rol) {
+        return getRole(rol);
+    }
+
+    @Override
+    public Optional<Role> findRoleById(UUID id) {
         return roleJpaRepository.findById(id)
                 .map(roleEntityMapper::toRole);
     }

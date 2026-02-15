@@ -20,7 +20,7 @@ public class RoleEntity {
     @Column(name = "rol_id", nullable = false, updatable = false)
     private UUID rolId;
 
-    @Column(name = "name", nullable = false)
+    @Column(name = "name", nullable = false,unique = true)
     private String rolName;
 
     @Column(name = "description")

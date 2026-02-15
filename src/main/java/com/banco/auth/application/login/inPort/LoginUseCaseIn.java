@@ -14,4 +14,5 @@ public interface LoginUseCaseIn {
     Login addRole(UUID id, Set<UUID> roles);
 
     Login removeRole(UUID id, Set<UUID> roles);
+
 }

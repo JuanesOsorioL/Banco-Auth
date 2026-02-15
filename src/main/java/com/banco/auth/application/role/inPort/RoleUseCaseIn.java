@@ -13,4 +13,9 @@ public interface RoleUseCaseIn {
 
     List<Role> findAllRoles();
 
+    Role statusTrue(UUID id);
+
+    Role statusFalse(UUID id);
+
+    Role updateRole(Role role);
 }

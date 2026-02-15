@@ -22,7 +22,6 @@ public class RoleController {
         this.roleMapper = roleMapper;
     }
 
-
     @PostMapping("/create")
     public ResponseEntity<RoleResponseDto> create(@Valid @RequestBody RoleRequestDto role) {
         return ResponseEntity.ok(roleMapper.toRoleResponseDto(roleUseCaseIn.createRole(roleMapper.toRole(role))));
@@ -37,5 +36,20 @@ public class RoleController {
     public ResponseEntity<List<RoleResponseDto>> getAllRoles() {
         return ResponseEntity.ok(roleUseCaseIn.findAllRoles().stream()
                 .map(roleMapper::toRoleResponseDto).toList());
+    }
+
+    @GetMapping("/enabled/{loginId}")
+    public ResponseEntity<RoleResponseDto> enabledRole(@Valid @PathVariable UUID loginId) {
+        return ResponseEntity.ok(roleMapper.toRoleResponseDto(roleUseCaseIn.statusTrue(loginId)));
+    }
+
+    @GetMapping("/disabled/{loginId}")
+    public ResponseEntity<RoleResponseDto> disableRole(@Valid @PathVariable UUID loginId) {
+        return ResponseEntity.ok(roleMapper.toRoleResponseDto(roleUseCaseIn.statusFalse(loginId)));
+    }
+
+    @PutMapping("/update")
+    public ResponseEntity<RoleResponseDto> disableRole(@Valid @RequestBody RoleRequestDto role) {
+        return ResponseEntity.ok(roleMapper.toRoleResponseDto(roleUseCaseIn.updateRole(roleMapper.toRole(role))));
     }
 }
