@@ -15,4 +15,12 @@ public interface LoginUseCaseIn {
 
     Login removeRole(UUID id, Set<UUID> roles);
 
+    Login getLoginById(UUID id);
+
+    Login UpdateLogin(Login login);
+
+    Login loginEnabled(UUID id);
+
+    Login loginDisabled(UUID id);
+
 }

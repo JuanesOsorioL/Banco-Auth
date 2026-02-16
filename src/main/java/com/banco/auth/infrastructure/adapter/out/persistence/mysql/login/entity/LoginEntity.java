@@ -21,10 +21,10 @@ public class LoginEntity {
     @Column(name = "login_id", nullable = false, updatable = false)
     private UUID loginId;
 
-    @Column(name = "username")
+    @Column(name = "username",nullable = false,unique = true)
     private String username;
 
-    @Column(name = "email")
+    @Column(name = "email",nullable = false,unique = true)
     private String email;
 
     @Column(name = "clue")

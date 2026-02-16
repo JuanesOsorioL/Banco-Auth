@@ -38,14 +38,14 @@ public class RoleController {
                 .map(roleMapper::toRoleResponseDto).toList());
     }
 
-    @GetMapping("/enabled/{loginId}")
-    public ResponseEntity<RoleResponseDto> enabledRole(@Valid @PathVariable UUID loginId) {
-        return ResponseEntity.ok(roleMapper.toRoleResponseDto(roleUseCaseIn.statusTrue(loginId)));
+    @GetMapping("/enabled/{roleId}")
+    public ResponseEntity<RoleResponseDto> enabledRole(@Valid @PathVariable UUID roleId) {
+        return ResponseEntity.ok(roleMapper.toRoleResponseDto(roleUseCaseIn.statusTrue(roleId)));
     }
 
-    @GetMapping("/disabled/{loginId}")
-    public ResponseEntity<RoleResponseDto> disableRole(@Valid @PathVariable UUID loginId) {
-        return ResponseEntity.ok(roleMapper.toRoleResponseDto(roleUseCaseIn.statusFalse(loginId)));
+    @GetMapping("/disabled/{roleId}")
+    public ResponseEntity<RoleResponseDto> disableRole(@Valid @PathVariable UUID roleId) {
+        return ResponseEntity.ok(roleMapper.toRoleResponseDto(roleUseCaseIn.statusFalse(roleId)));
     }
 
     @PutMapping("/update")

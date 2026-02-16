@@ -7,6 +7,7 @@ import com.banco.auth.infrastructure.adapter.out.persistence.mysql.login.reposit
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Repository
@@ -21,10 +22,18 @@ public class LoginAdapter implements LoginRepositoryOut {
         this.loginEntityMapper = loginEntityMapper;
     }
 
+    private Login getLogin(Login login) {
+        return loginEntityMapper.toLoginCreate(loginJpaRepository.save(loginEntityMapper.toLoginEntityCreate(login)));
+    }
+
+    @Override
+    public Login saveChange(Login login) {
+        return getLogin(login);
+    }
 
     @Override
     public Login register(Login login) {
-        return loginEntityMapper.toLoginCreate(loginJpaRepository.save(loginEntityMapper.toLoginEntityCreate(login)));
+        return getLogin(login);
     }
 
     @Override
@@ -35,17 +44,14 @@ public class LoginAdapter implements LoginRepositoryOut {
     }
 
     @Override
-    public Login getloginById(UUID id) {
-        return loginEntityMapper.toLogin(loginJpaRepository.getReferenceById(id));
+    public Optional<Login> getloginById(UUID id) {
+        return loginJpaRepository.findById(id)
+                .map(loginEntityMapper::toLogin);
     }
 
     @Override
-    public Login addRole(Login login) {
-        return loginEntityMapper.toLoginAdd(loginJpaRepository.save(loginEntityMapper.toLoginEntityAdd(login)));
+    public Login addOrRemoveRole(Login login) {
+        return loginEntityMapper.toLoginAddOrRemove(loginJpaRepository.save(loginEntityMapper.toLoginEntityAdd(login)));
     }
 
-    @Override
-    public Login removeRole(Login login) {
-        return loginEntityMapper.toLoginAdd(loginJpaRepository.save(loginEntityMapper.toLoginEntityAdd(login)));
-    }
 }

@@ -81,7 +81,7 @@ public class LoginEntityMapper {
         );
     }
 
-    public Login toLoginAdd(LoginEntity loginEntity) {
+    public Login toLoginAddOrRemove(LoginEntity loginEntity) {
         if (loginEntity == null) {
             return null;
         }

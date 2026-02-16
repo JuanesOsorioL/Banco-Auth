@@ -4,6 +4,7 @@ import com.banco.auth.domain.login.Login;
 import com.banco.auth.infrastructure.adapter.in.controllers.login.dto.LoginAllResponseDto;
 import com.banco.auth.infrastructure.adapter.in.controllers.login.dto.LoginRequestDto;
 import com.banco.auth.infrastructure.adapter.in.controllers.login.dto.LoginResponseDto;
+import com.banco.auth.infrastructure.adapter.in.controllers.login.dto.LoginUpdateRequestDto;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
@@ -13,4 +14,7 @@ public interface LoginMapper {
     LoginResponseDto toLoginResponseDto(Login login);
 
     LoginAllResponseDto toLoginAllResponseDto(Login login);
+
+    Login toLogin(LoginUpdateRequestDto login);
+
 }

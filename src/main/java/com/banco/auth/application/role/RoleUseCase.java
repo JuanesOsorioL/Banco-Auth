@@ -69,9 +69,9 @@ public class RoleUseCase implements RoleUseCaseIn {
     public Role updateRole(Role role) {
         logger.info("Updating role with ID: {}", role.rolId());
         // DataIntegrityViolationException
-        Role updatRole = this.findRoleById(role.rolId());
+        Role existRole = this.findRoleById(role.rolId());
         try {
-            Role updatedRole = roleRepository.saveChange(updatRole.updateRole(role.rolName(), role.rolDescription()));
+            Role updatedRole = roleRepository.saveChange(Role.updateRole(existRole.rolId(), role.rolName(), role.rolDescription(),existRole.rolStatus()));
             logger.info("Role updated successfully with ID: {}", updatedRole.rolId());
             return updatedRole;
         } catch (DataIntegrityViolationException e) {

@@ -13,11 +13,11 @@ public record Role(
         if (rolDescription == null) throw new IllegalArgumentException("Description requerido");
     }
 
-    public Role createRole(String rolName, String rolDescription) {
+    public static Role createRole(String rolName, String rolDescription) {
         return new Role(null, rolName, rolDescription, true);
     }
 
-    public Role updateRole(String rolName, String rolDescription) {
+    public static Role updateRole(UUID rolId,String rolName, String rolDescription,Boolean rolStatus) {
         return new Role(rolId, rolName, rolDescription, rolStatus);
     }
 

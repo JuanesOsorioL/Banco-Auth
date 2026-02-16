@@ -2,16 +2,12 @@ package com.banco.auth.infrastructure.adapter.in.controllers.login;
 
 import com.banco.auth.application.login.inPort.LoginUseCaseIn;
 import com.banco.auth.domain.login.Login;
-import com.banco.auth.infrastructure.adapter.in.controllers.login.dto.LoginAddRoleRequestDto;
-import com.banco.auth.infrastructure.adapter.in.controllers.login.dto.LoginAllResponseDto;
-import com.banco.auth.infrastructure.adapter.in.controllers.login.dto.LoginRequestDto;
-import com.banco.auth.infrastructure.adapter.in.controllers.login.dto.LoginResponseDto;
+import com.banco.auth.infrastructure.adapter.in.controllers.login.dto.*;
 import com.banco.auth.infrastructure.adapter.in.controllers.login.mapper.LoginMapper;
 import com.banco.auth.infrastructure.adapter.in.controllers.login.mapper.LoginResponseAssembler;
 import com.banco.auth.infrastructure.adapter.in.controllers.role.dto.RoleResponseDto;
 import com.banco.auth.infrastructure.adapter.in.controllers.role.mapper.RoleMapper;
 import jakarta.validation.Valid;
-import org.jspecify.annotations.NonNull;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -90,6 +86,21 @@ public class LoginController {
         return ResponseEntity.ok(response);
     }
 
+    @PostMapping("/update")
+    public ResponseEntity<LoginAllResponseDto> updateLogin(@Valid @RequestBody LoginUpdateRequestDto request) {
+        return ResponseEntity.ok(loginMapper.toLoginAllResponseDto(loginUseCaseIn.UpdateLogin(loginMapper.toLogin(request))));
+    }
 
+
+    @GetMapping("/enabled/{loginId}")
+    public ResponseEntity<LoginAllResponseDto> enabledRole(@Valid @PathVariable UUID loginId) {
+        return ResponseEntity.ok(loginMapper.toLoginAllResponseDto(loginUseCaseIn.loginEnabled(loginId)));
+    }
+
+    @GetMapping("/disabled/{loginId}")
+    public ResponseEntity<LoginAllResponseDto> disableRole(@Valid @PathVariable UUID loginId) {
+        return ResponseEntity.ok(loginMapper.toLoginAllResponseDto(loginUseCaseIn.loginDisabled(loginId)));
+    }
 
 }
+//new HashSet<>()

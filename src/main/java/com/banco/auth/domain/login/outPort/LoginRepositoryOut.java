@@ -3,6 +3,7 @@ package com.banco.auth.domain.login.outPort;
 import com.banco.auth.domain.login.Login;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 public interface LoginRepositoryOut {
@@ -10,10 +11,10 @@ public interface LoginRepositoryOut {
 
     List<Login> getAllRegister();
 
-    Login getloginById(UUID id);
+    Optional<Login> getloginById(UUID id);
 
-    Login addRole(Login login);
+    Login addOrRemoveRole(Login login);
 
-    Login removeRole(Login login);
+    Login saveChange(Login login);
 
 }
